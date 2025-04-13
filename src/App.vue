@@ -1,26 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <button @click="showList = !showList">
+      {{ showList ? 'Hide' : 'Show' }} User List
+    </button>
+
+    <UserList v-if="showList" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import UserList from './components/UserList.vue';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    UserList
+  },
+  data() {
+    return {
+      showList: true,
+    };
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<!-- When showList is true, UserList.vue is mounted.
+When showList becomes false, Vue unmounts it — and your console will show:
+1. beforeUnmount - Clearing interval.
+2. unmounted - Component is destroyed.
+Meanwhile, every time the users are fetched and DOM updates, you’ll also see the full lifecycle logs in order. -->
