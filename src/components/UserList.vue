@@ -1,7 +1,10 @@
 <template>
     <div>
-      <h1 ref="header">User List</h1>
-      <ul>
+      <h1 ref="header">User List form UserList COmponent</h1>
+      <button @click="showList = !showList">
+      {{ showList ? 'Hide' : 'Show' }} User List
+    </button>
+      <ul v-if="showList">
         <li v-for="user in users" :key="user.id">{{ user.name }}</li>
       </ul>
     </div>
@@ -15,6 +18,7 @@
       return {
         users: [],
         interval: null,
+        showList: true,
       };
     },
     beforeCreate() {

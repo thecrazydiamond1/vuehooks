@@ -1,30 +1,27 @@
 <template>
   <div>
-    <button @click="showList = !showList">
-      {{ showList ? 'Hide' : 'Show' }} User List
-    </button>
+ 
 
-    <UserList v-if="showList" />
+    <button @click="currentComponent = currentComponent === 'UserList' ? 'MountApiCall' : 'UserList'">
+      Toggle User List
+    </button>
+    <component :is="currentComponent"></component>
   </div>
 </template>
 
 <script>
 import UserList from './components/UserList.vue';
-
+import MountApiCall from './components/MountApiCall.vue';
 export default {
   components: {
-    UserList
+    UserList,
+    MountApiCall,
   },
-  data() {
-    return {
-      showList: true,
-    };
-  },
+ data(){
+  return{
+    currentComponent: 'UserList',
+  }
+ }
 };
 </script>
 
-<!-- When showList is true, UserList.vue is mounted.
-When showList becomes false, Vue unmounts it — and your console will show:
-1. beforeUnmount - Clearing interval.
-2. unmounted - Component is destroyed.
-Meanwhile, every time the users are fetched and DOM updates, you’ll also see the full lifecycle logs in order. -->
